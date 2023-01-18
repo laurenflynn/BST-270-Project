@@ -5,6 +5,11 @@ date: "2023-01-17"
 output: html_document
 ---
 
+### Summary
+#### Input Data: https://github.com/fivethirtyeight/data/tree/master/bad-drivers
+#### Article: https://fivethirtyeight.com/features/which-state-has-the-worst-drivers/
+
+
 We will be examining the reproducibility of fivethirtyeight articles using the following example from a [fivethirtyeight article](https://fivethirtyeight.com/features/which-state-has-the-worst-drivers/) about "bad drivers", which utilizes information about vehicle collisions and car insurance to examine driver safety.
 
 
@@ -12,7 +17,7 @@ We will be examining the reproducibility of fivethirtyeight articles using the f
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r load libraries}
+```{r load libraries, warnings= FALSE, message=FALSE}
 library(tidyverse)
 library(RCurl)
 ```
@@ -20,14 +25,16 @@ library(RCurl)
 
 The data is loaded from GitHub, where a chart displays the source information for each column. In the graphs that we will be reproducing below, the original source of the data is the National Highway Traffic Safety Administration (NHTSA). It is not clear based on the GitHub or the fivethirtyeight article how the data was wrangled to produce this dataset. Importantly, the NHTSA is a survey dataset, so it is not clear if the weights have been properly incorporated into the dataset. This dataset was accessed on Tuesday, January 17, 2023. It was last updated December 16, 2022. 
 
+There are 8 columns of the data, and the names are listed below. The README of fivethirtyeight's GitHub repository shares the original source of each file (however without wrangling steps to get the original source into this clean format). As we are only reproducing 3 figures, it will 
 
-```{r load data}
+
+```{r load data, cache=TRUE}
 gitData <- getURL("https://raw.githubusercontent.com/fivethirtyeight/data/master/bad-drivers/bad-drivers.csv")
 carCrashes <- read.csv(text = gitData)
 names(carCrashes)
 ```
 The first figure we will reproduce is titled "Drivers Involved In Fatal Collisions While Speeding As a share of the number of fatal collisions per billion miles, 2009". 
-```{r speeding collisions}
+```{r speeding collisions, fig.asp=1.3, cache=TRUE}
 #add a column of counts of speeding related collisions
 carCrashes <- carCrashes %>% mutate(fatalSpeedingAccidentsPerBillionMiles = Number.of.drivers.involved.in.fatal.collisions.per.billion.miles * Percentage.Of.Drivers.Involved.In.Fatal.Collisions.Who.Were.Speeding * 0.01)
 
@@ -37,25 +44,30 @@ ggplot(data=carCrashes) +
   geom_col(aes(x=State, y= fatalSpeedingAccidentsPerBillionMiles, fill = "Speeding Collisions Per Billion Miles")) +
   scale_x_discrete(limits = rev) +
   coord_flip() + 
-  scale_fill_manual(values=c("red", "pink")) + 
-  labs(x="", y="", title = "Drivers Involved In Fatal Collisions While Speeding", subtitle = "As a share of the number of fatal collisions per billion miles, 2009", legend = "")  
+  scale_fill_manual(values=c("red", "pink"), name ="") + 
+  labs(x="", y="", title = "Drivers Involved In Fatal Collisions While Speeding", subtitle = "As a share of the number of fatal collisions per billion miles, 2009", legend = "")  +
+  scale_y_continuous(position="right") + 
+  theme(legend.position="top")
 ```
 
 The second figure we will reproduce is titled "Drivers Involved In Fatal Collisions While Alchol-Impaired As a share of the number of fatal collisions per billion miles, 2012". 
-```{r alcohol collisions}
+```{r alcohol collisions, fig.asp=1.3, cache=TRUE}
 #add a column of counts of alcohol related collisions
 carCrashes <- carCrashes %>% mutate(fatalAlcoholAccidentsPerBillionMiles = Number.of.drivers.involved.in.fatal.collisions.per.billion.miles * Percentage.Of.Drivers.Involved.In.Fatal.Collisions.Who.Were.Alcohol.Impaired * 0.01)
 
-
+#generate visualization
 ggplot(data=carCrashes) +  
   geom_col(aes(x=State, y=Number.of.drivers.involved.in.fatal.collisions.per.billion.miles, fill = "Total Collisions Per Billion Miles"))  + 
   geom_col(aes(x=State, y= fatalAlcoholAccidentsPerBillionMiles, fill = "Alcohol Collisions Per Billion Miles")) +
   scale_x_discrete(limits = rev) +
   coord_flip() + 
-  scale_fill_manual(values=c("deepskyblue3", "light blue")) + 
-  labs(x="", y="", title = "Drivers Involved In Fatal Collisions While Alcohol-Impaired", subtitle = "As a share of the number of fatal collisions per billion miles, 2012")  
+  scale_fill_manual(values=c("deepskyblue3", "light blue"), name = "") + 
+  labs(x="", y="", title = "Drivers Involved In Fatal Collisions While Alcohol-Impaired", subtitle = "As a share of the number of fatal collisions per billion miles, 2012")  +
+  scale_y_continuous(position="right") + 
+  theme(legend.position="top")
 ```
 
 
 
-There is not a clear explanation on why different years were selected for the visualizations. 
+There is not a clear explanation on why different years were selected for the visualizations. It would be interesting to know if these are based purely on data availability, if some years contain more interesting trends, or if the authors just wanted to give an idea of driving behaviors in the U.S.A. over time. The number of collisions per billion miles was given for year 2012, but the percent of collisions per billion miles while speeding is given for 2009. Therefore, it seems that all the numbers for this section will be wrong. At the time the article was written, the author claimed that the most recent data from the NHTSA regarding speeding was from 2009, which is why they used percentages from 2009 rather than 2012. However, there is not a column in the dataset with the total crashes from 2009, and this was not mentioned in the article.
+
