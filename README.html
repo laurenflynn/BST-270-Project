@@ -358,8 +358,8 @@ pre code {
 </div>
 
 
-<div id="bst-270-project" class="section level1">
-<h1>BST-270-Project</h1>
+<div id="bst-270-project" class="section level3">
+<h3>BST-270-Project</h3>
 <div id="individual-project-for-bst-270-reproducible-data-science-at-harvard-t.h.-chan-school-of-public-health-in-winter-2023" class="section level4">
 <h4>Individual project for BST 270 Reproducible Data Science at Harvard
 T.H. Chan School of Public Health in winter 2023</h4>
@@ -377,31 +377,69 @@ Administration (NHTSA).</p>
 <h5>How to Use</h5>
 <p>To reproduce two of the graphics from the project, please run the
 file <code>/source/analysis.Rmd</code>. It can be knit in Rstudio to
-produce the html output. The data will be downloaded from
-fivethirtyeight’s data/bad-drivers GitHub as part of the script, so
-there is no need to download the data manually. The data, taken from
-file bad-drivers.csv from the repository, is accessed in raw form at <a href="https://raw.githubusercontent.com/fivethirtyeight/data/master/bad-drivers/bad-drivers.csv" class="uri">https://raw.githubusercontent.com/fivethirtyeight/data/master/bad-drivers/bad-drivers.csv</a>.</p>
+produce the html output. The data will be pulled from fivethirtyeight’s
+data/bad-drivers GitHub as part of the script, so there is no need to
+download the data manually. The data, taken from file bad-drivers.csv
+from the repository, is accessed in raw form at <a href="https://raw.githubusercontent.com/fivethirtyeight/data/master/bad-drivers/bad-drivers.csv" class="uri">https://raw.githubusercontent.com/fivethirtyeight/data/master/bad-drivers/bad-drivers.csv</a>.</p>
+</div>
+<div id="data-description" class="section level5">
+<h5>Data Description</h5>
+<p>We will be utilizing the following variables:</p>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="43%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Original Source</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">State</td>
+<td align="left"></td>
+<td align="left">50 states and Washington D.C.</td>
+</tr>
+<tr class="even">
+<td align="left">Number.of.drivers.involved.in.fatal.collisions.per.billion.miles</td>
+<td align="left">National Highway Traffic Safety Administration,
+2012</td>
+<td align="left">Using data per billion miles driven rather than total
+count to normalize the states</td>
+</tr>
+<tr class="odd">
+<td align="left">Percentage.Of.Drivers.Involved.In.Fatal.Collisions.Who.Were.Speeding</td>
+<td align="left">National Highway Traffic Safety Administration,
+2009</td>
+<td align="left">Year different than the number of collisions per
+billion miles</td>
+</tr>
+<tr class="even">
+<td align="left">Percentage.Of.Drivers.Involved.In.Fatal.Collisions.Who.Were.Alcohol.Impaired</td>
+<td align="left">National Highway Traffic Safety Administration,
+2012</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="version-information" class="section level5">
 <h5>Version Information</h5>
-<p>R version 4.1.2 (2021-11-01) Bird Hippie</p>
+<p>R version 4.1.2 (2021-11-01) Bird Hippie <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></p>
 <p>RStudio 2022.07.1+554 “Spotted Wakerobin” Release
 (7872775ebddc40635780ca1ed238934c3345c5de, 2022-07-22) for macOS
 Mozilla/5.0 (Macintosh; Intel Mac OS X 12_3_1) AppleWebKit/537.36
 (KHTML, like Gecko) QtWebEngine/5.12.10 Chrome/69.0.3497.128
-Safari/537.36</p>
-<p>Version of packages:</p>
+Safari/537.36 <a href="https://dailies.rstudio.com/version/2022.07.1+554.pro3/" class="uri">https://dailies.rstudio.com/version/2022.07.1+554.pro3/</a></p>
+<p>R Packages:</p>
 <ul>
-<li><p>RCurl 1.98-1.9</p></li>
-<li><p>Tidyverse 1.3.2</p></li>
+<li><p>RCurl 1.98-1.9 <a href="https://cran.r-project.org/web/packages/RCurl/index.html" class="uri">https://cran.r-project.org/web/packages/RCurl/index.html</a></p></li>
+<li><p>Tidyverse 1.3.2 <a href="https://www.tidyverse.org/packages/#installation-and-use" class="uri">https://www.tidyverse.org/packages/#installation-and-use</a></p></li>
 </ul>
-<div id="source-for-each-of-the-following" class="section level6">
-<h6>Source for each of the following:</h6>
-<p>R version 4.1.2 <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></p>
-<p>RStudio 2022.07.1 <a href="https://dailies.rstudio.com/version/2022.07.1+554.pro3/" class="uri">https://dailies.rstudio.com/version/2022.07.1+554.pro3/</a></p>
-<p>RCurl <a href="https://cran.r-project.org/web/packages/RCurl/index.html" class="uri">https://cran.r-project.org/web/packages/RCurl/index.html</a></p>
-<p>Tidyverse</p>
-</div>
 </div>
 </div>
 </div>
